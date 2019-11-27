@@ -1,42 +1,41 @@
-package com.example.viewmodelrepomemoryleak.ui.main
+package com.example.viewmodelrepomemoryleak
 
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.example.viewmodelrepomemoryleak.repos.Repo
 
 class MainViewModel(val repo: Repo) : ViewModel() {
 
-    val staffer = MediatorLiveData<Long>()
+    val id = MediatorLiveData<Long>()
 
     init {
-        staffer.addSource(repo) {
-            staffer.value = it
+        id.addSource(repo) {
+            id.value = it
         }
     }
 
     fun setId(stafferId: Long) {
-        repo.stafferId.value = stafferId
+        repo.id.value = stafferId
     }
 
-    override fun onCleared() {
-        super.onCleared()
-//        repo.teardown()
-    }
 }
-
 
 /**
  * Factory for [MainViewModel].
  */
 object LiveDataMainFactory : ViewModelProvider.Factory {
 
-    private val stafferId = MutableLiveData<Long>()
-    private val repo = Repo(stafferId)
+    private val id = MutableLiveData<Long>()
+    private val repo =
+        Repo(id)
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         @Suppress("UNCHECKED_CAST")
-        return MainViewModel(repo) as T
+        return MainViewModel(
+            repo
+        ) as T
     }
 
 }

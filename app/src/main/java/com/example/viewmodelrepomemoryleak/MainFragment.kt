@@ -6,10 +6,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import com.example.viewmodelrepomemoryleak.LiveDataMainFactory
+import com.example.viewmodelrepomemoryleak.MainViewModel
 import com.example.viewmodelrepomemoryleak.NextActivity
 import com.example.viewmodelrepomemoryleak.R
 import kotlinx.android.synthetic.main.main_fragment.*
@@ -30,7 +31,7 @@ class MainFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel.setId(1000L)
-        viewModel.staffer.observe(viewLifecycleOwner, Observer {
+        viewModel.id.observe(viewLifecycleOwner, Observer {
             Log.v(TAG, "Long: $it")
         })
 
