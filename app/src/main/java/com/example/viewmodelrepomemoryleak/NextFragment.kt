@@ -1,4 +1,4 @@
-package com.example.viewmodelrepomemoryleak.ui.main
+package com.example.viewmodelrepomemoryleak
 
 import android.os.Bundle
 import android.util.Log
@@ -8,15 +8,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import com.example.viewmodelrepomemoryleak.LiveDataMainFactory
-import com.example.viewmodelrepomemoryleak.MainViewModel
-import com.example.viewmodelrepomemoryleak.R
+import com.example.viewmodelrepomemoryleak.viewmodels.LiveDataMainFactory
+import com.example.viewmodelrepomemoryleak.viewmodels.MainViewModel
+import kotlinx.android.synthetic.main.next_fragment.*
 
 class NextFragment : Fragment() {
 
-    val TAG = NextFragment::class.java.simpleName
-
-    private val viewModel: MainViewModel by viewModels { LiveDataMainFactory }
+    private val viewModel: MainViewModel by viewModels({ requireActivity() }) { LiveDataMainFactory }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,10 +25,11 @@ class NextFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel.setId(9900L)
+
         viewModel.id.observe(viewLifecycleOwner, Observer {
-            Log.v(TAG, "Long: $it")
+            message.text = getString(R.string.nextfragment, it)
         })
+
     }
 
     companion object {

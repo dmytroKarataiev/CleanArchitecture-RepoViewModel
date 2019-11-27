@@ -2,10 +2,13 @@ package com.example.viewmodelrepomemoryleak
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.viewmodelrepomemoryleak.ui.main.MainFragment
-import com.example.viewmodelrepomemoryleak.ui.main.NextFragment
+import androidx.activity.viewModels
+import com.example.viewmodelrepomemoryleak.viewmodels.LiveDataMainFactory
+import com.example.viewmodelrepomemoryleak.viewmodels.MainViewModel
 
 class NextActivity : AppCompatActivity() {
+
+    private val viewModel: MainViewModel by viewModels { LiveDataMainFactory }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -15,6 +18,7 @@ class NextActivity : AppCompatActivity() {
                 .replace(R.id.container, NextFragment.newInstance())
                 .commitNow()
         }
+        viewModel.setId(2)
     }
 
 }

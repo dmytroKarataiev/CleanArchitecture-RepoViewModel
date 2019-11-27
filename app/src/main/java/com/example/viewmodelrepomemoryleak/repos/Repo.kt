@@ -1,6 +1,5 @@
 package com.example.viewmodelrepomemoryleak.repos
 
-import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 
 /**
@@ -10,6 +9,12 @@ import androidx.lifecycle.MutableLiveData
  *
  * Open for testing to create a MockRepo.
  */
-abstract class AbstractRepo(val id: MutableLiveData<Long>): MediatorLiveData<Long>() {
+class Repo(id: MutableLiveData<Long>): AbstractRepo(id) {
+
+    init {
+        addSource(id) { number ->
+            value = number
+        }
+    }
 
 }

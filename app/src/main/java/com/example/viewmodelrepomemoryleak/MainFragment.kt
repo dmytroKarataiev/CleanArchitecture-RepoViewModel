@@ -1,4 +1,4 @@
-package com.example.viewmodelrepomemoryleak.ui.main
+package com.example.viewmodelrepomemoryleak
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,17 +9,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import com.example.viewmodelrepomemoryleak.LiveDataMainFactory
-import com.example.viewmodelrepomemoryleak.MainViewModel
-import com.example.viewmodelrepomemoryleak.NextActivity
-import com.example.viewmodelrepomemoryleak.R
+import com.example.viewmodelrepomemoryleak.viewmodels.LiveDataMainFactory
+import com.example.viewmodelrepomemoryleak.viewmodels.MainViewModel
 import kotlinx.android.synthetic.main.main_fragment.*
 
 class MainFragment : Fragment() {
 
-    val TAG = MainFragment::class.java.simpleName
-
-    private val viewModel: MainViewModel by viewModels { LiveDataMainFactory }
+    private val viewModel: MainViewModel by viewModels({ requireActivity() }) { LiveDataMainFactory }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,14 +26,15 @@ class MainFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel.setId(1000L)
+
         viewModel.id.observe(viewLifecycleOwner, Observer {
-            Log.v(TAG, "Long: $it")
+            message.text = getString(R.string.mainfragment, it)
         })
 
         next.setOnClickListener {
             startActivity(Intent(context, NextActivity::class.java))
         }
+
     }
 
     companion object {

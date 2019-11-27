@@ -46,6 +46,13 @@ dependencies {
     // Memory leak analyser
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.0-beta-5'
 
+    // MutableLiveData Rule to bypass thread check
+    testImplementation 'android.arch.core:core-testing:1.1.1'
+
+    // Mockito framework
+    testImplementation 'org.mockito:mockito-core:2.19.0'
+
+    // Adds viewmodels delegate
     implementation 'androidx.fragment:fragment-ktx:1.2.0-rc02'
 
 }
