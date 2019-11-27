@@ -1,7 +1,6 @@
 package com.example.viewmodelrepomemoryleak
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +13,7 @@ import kotlinx.android.synthetic.main.next_fragment.*
 
 class NextFragment : Fragment() {
 
-    private val viewModel: MainViewModel by viewModels({ requireActivity() }) { LiveDataMainFactory }
+    private val viewModel: MainViewModel by viewModels { LiveDataMainFactory }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,6 +25,7 @@ class NextFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        viewModel.setId(2)
         viewModel.id.observe(viewLifecycleOwner, Observer {
             message.text = getString(R.string.nextfragment, it)
         })

@@ -8,8 +8,6 @@ import com.example.viewmodelrepomemoryleak.viewmodels.MainViewModel
 
 class NextActivity : AppCompatActivity() {
 
-    private val viewModel: MainViewModel by viewModels { LiveDataMainFactory }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
@@ -18,7 +16,6 @@ class NextActivity : AppCompatActivity() {
                 .replace(R.id.container, NextFragment.newInstance())
                 .commitNow()
         }
-        viewModel.setId(2)
     }
 
 }

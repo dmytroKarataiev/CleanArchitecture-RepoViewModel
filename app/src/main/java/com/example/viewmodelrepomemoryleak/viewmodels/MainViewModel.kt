@@ -24,6 +24,11 @@ class MainViewModel(private val repo: AbstractRepo) : ViewModel() {
         repo.id.value = stafferId
     }
 
+    override fun onCleared() {
+        super.onCleared()
+        repo.onClear()
+    }
+
 }
 
 /**
