@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
  *
  * Open for testing to create a MockRepo.
  */
-class Repo(id: MutableLiveData<Long>) : AbstractRepo(id) {
+class Repo(id: MutableLiveData<Long>) : AbstractRepo<Long>(id) {
 
     init {
         addSource(id) { number ->

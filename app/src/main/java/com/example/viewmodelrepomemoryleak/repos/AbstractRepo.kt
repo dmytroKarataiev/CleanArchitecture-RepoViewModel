@@ -13,7 +13,7 @@ import kotlinx.coroutines.cancel
  *
  * Open for testing to create a MockRepo.
  */
-abstract class AbstractRepo(val id: MutableLiveData<Long>): MediatorLiveData<Long>() {
+abstract class AbstractRepo<T>(val observable: MutableLiveData<T>): MediatorLiveData<T>() {
 
     val scope = CoroutineScope(Dispatchers.IO)
 

@@ -10,7 +10,7 @@ import com.example.viewmodelrepomemoryleak.repos.Repo
 /**
  * ViewModel that is injected with a Repository which emits data to views.
  */
-class MainViewModel(private val repo: AbstractRepo) : ViewModel() {
+class MainViewModel(private val repo: AbstractRepo<Long>) : ViewModel() {
 
     val id = MediatorLiveData<Long>()
 
@@ -21,7 +21,7 @@ class MainViewModel(private val repo: AbstractRepo) : ViewModel() {
     }
 
     fun setId(stafferId: Long) {
-        repo.id.value = stafferId
+        repo.observable.value = stafferId
     }
 
     override fun onCleared() {
