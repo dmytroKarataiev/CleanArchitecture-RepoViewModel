@@ -36,10 +36,10 @@ class MainViewModel(private val repo: AbstractRepo<Long>) : ViewModel() {
  */
 object LiveDataMainFactory : ViewModelProvider.Factory {
 
-    private val id = MutableLiveData<Long>()
-    private val repo = Repo(id)
-
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+        val id = MutableLiveData<Long>()
+        val repo = Repo(id)
+
         @Suppress("UNCHECKED_CAST")
         return MainViewModel(
             repo
